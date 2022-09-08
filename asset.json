@@ -1,0 +1,10 @@
+{
+  "description": "Simple NFT",
+  "name": "Test NFT",
+  "attributes": [
+    {
+      "trait_type": "rarity",
+      "value": "Good"
+    }
+  ]
+}
