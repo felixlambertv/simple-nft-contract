@@ -10,8 +10,8 @@ contract NFT is ERC721, ERC721URIStorage, INFT {
     using Counters for Counters.Counter;
 
     string public baseUri;
-    string[3] public rarityNameList;
-    mapping(string => uint8) public rarityNameToRate;
+    string[3] private rarityNameList;
+    mapping(string => uint8) private rarityNameToRate;
     Counters.Counter private _tokenIdCounter;
 
     constructor() ERC721("IAV", "IAV") {
@@ -20,9 +20,9 @@ contract NFT is ERC721, ERC721URIStorage, INFT {
         rarityNameList[1] = "Normal";
         rarityNameList[2] = "Bad";
 
-        rarityNameToRate["Good"] = 1;
-        rarityNameToRate["Normal"] = 6;
-        rarityNameToRate["Bad"] = 3;
+        rarityNameToRate["Good"] = 10;
+        rarityNameToRate["Normal"] = 60;
+        rarityNameToRate["Bad"] = 30;
     }
 
     function _baseURI() internal view override returns (string memory) {
@@ -42,6 +42,10 @@ contract NFT is ERC721, ERC721URIStorage, INFT {
 
     function getRarityList() public view override returns(string[3] memory) {
         return rarityNameList;
+    }
+
+    function getRarityRate(string memory _name) external view override returns(uint8 rate){
+        return rarityNameToRate[_name];
     }
 
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
